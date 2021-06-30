@@ -36,7 +36,7 @@ def read_args():
     parser.add_argument('-l2_reg_lambda', type=float, default=1e-5, help='regularization rate')
     parser.add_argument('-learning_rate', type=float, default=1e-5, help='learning rate')
     parser.add_argument('-batch_size', type=int, default=8, help='batch size')
-    parser.add_argument('-num_epochs', type=int, default=25, help='the number of epochs')    
+    parser.add_argument('-num_epochs', type=int, default=3, help='the number of epochs')    
     parser.add_argument('-save-dir', type=str, default='codebert4jit_msg_code', help='where to save the snapshot')    
 
     # CUDA
