@@ -392,18 +392,16 @@ def read_args():
     
     
     ## Required parameters
-    parser.add_argument("--data_dir",#default="../NCS/python_stackoverflow/", 
-                        default='../../NCS/python_raw/', 
+    parser.add_argument("--data_dir",default="../NCS/python_stackoverflow/", # default="../data/codesearch/train_valid/go", 
                         type=str, 
                         help="The input data dir. Should contain the .tsv files (or other data files) for the task.")
     parser.add_argument("--model_type", default="roberta", type=str, 
                         help="Model type selected in the list: " + ", ".join(MODEL_CLASSES.keys()))
-    parser.add_argument("--model_name_or_path",default= "microsoft/codebert-base", 
-            #default='roberta-base' ,
-            type=str, help="Path to pre-trained model or shortcut name")
+    parser.add_argument("--model_name_or_path",#default= "microsoft/codebert-base", 
+            default='roberta-base' , type=str, help="Path to pre-trained model or shortcut name")
     parser.add_argument("--task_name", default='codesearch', type=str, 
                         help="The name of the task to train selected in the list: " + ", ".join(processors.keys()))
-    parser.add_argument("--output_dir", default="./models/python_comment_codebert_testing", type=str,   #### where to store the trained model
+    parser.add_argument("--output_dir", default="./models/python_stackoverflow_roberta", type=str,   #### where to store the trained model
                         help="The output directory where the model predictions and checkpoints will be written.")
 
     ## Other parameters
@@ -450,9 +448,9 @@ def read_args():
     parser.add_argument("--warmup_steps", default=0, type=int,
                         help="Linear warmup over warmup_steps.")
 
-    parser.add_argument('--logging_steps', type=int, default=2000,
+    parser.add_argument('--logging_steps', type=int, default=500,
                         help="Log every X updates steps.")
-    parser.add_argument('--save_steps', type=int, default=2000,
+    parser.add_argument('--save_steps', type=int, default=500,
                         help="Save checkpoint every X updates steps.")
     parser.add_argument("--eval_all_checkpoints", action='store_true',
                         help="Evaluate all checkpoints starting with the same prefix as model_name ending and ending with step number")
@@ -627,7 +625,7 @@ def main():
                                                 'module') else model  # Take care of distributed/parallel training
         model_to_save.save_pretrained(args.output_dir)
         tokenizer.save_pretrained(args.output_dir)
-        print("\n one epoch is finished and the model is saved")
+
         # Good practice: save your training arguments together with the trained model
         torch.save(args, os.path.join(args.output_dir, 'training_args.bin'))
 
