@@ -10,7 +10,7 @@ pip install transformers
 
 ## data & pre-trained models
 
-data and pre-trained models can be found here ()
+data and pre-trained models can be found here (https://drive.google.com/drive/folders/199qFIMUg1rm53jnKejCDKxqMFY89wzNd)
 
 ## Training
 
