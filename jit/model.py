@@ -66,16 +66,13 @@ class  CodeBERT4JIT(nn.Module):
 	# CNN
         x = [F.relu(conv(x)).squeeze(3) for conv in self.convs_code_line]  
       	# max pooling
-        #print(len(x), x[0].size())
         x = [F.max_pool1d(i, i.size(2)).squeeze(2) for i in x]  # (batch_size, output_channels, num_sentences) * ks
         x = torch.cat(x, 1)  # (batch_size, channel_output * ks)
         x_code = x
 
         ## Concatenate Code and Msg
        
-        #x_msg_zero = torch.zeros(x_msg.size()).cuda()
-        #x_code_zero = torch.zeros(x_code.size()).cuda()
-        #x_commit = torch.cat((x_msg_zero, x_code), 1)
+     
         x_commit = torch.cat((x_msg, x_code), 1)
         x_commit = self.dropout(x_commit)
         out = self.fc1(x_commit)
